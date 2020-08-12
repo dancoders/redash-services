@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
- * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
+ * @author dancoder
  */
 @Data
 public class UserModel {
@@ -23,4 +23,6 @@ public class UserModel {
     private JSONObject details;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+
+    // PG json 使用model、mapper、以及数据操作时的写法：https://blog.csdn.net/weixin_42800689/article/details/91413254
 }
