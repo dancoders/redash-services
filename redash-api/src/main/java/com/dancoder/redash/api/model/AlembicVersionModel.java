@@ -6,6 +6,6 @@ import lombok.Data;
  * @author dancoder
  */
 @Data
-public class AlembicVersion {
-    private 
+public class AlembicVersionModel {
+    private String versionNum;
 }
