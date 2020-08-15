@@ -7,5 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @author dancoder
  */
 @Mapper
-public interface ChangesMapper {
+public interface ChangeMapper {
 }

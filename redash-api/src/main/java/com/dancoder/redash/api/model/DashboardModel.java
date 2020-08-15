@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  * @author dancoder
  */
 @Data
-public class DashboardsModel {
+public class DashboardModel {
     private Long id;
     private Long version;
     private Long orgId;

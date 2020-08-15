@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dancoder.redash.dao.mapper.AlertsMapper">
+<mapper namespace="com.dancoder.redash.dao.mapper.AlertMapper">
 
-    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.AlertSubscriptionsDO">
+    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.AlertSubscriptionDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>
         <result column="query_id" property="queryId" jdbcType="INTEGER"></result>
         <result column="user_id" property="userId" jdbcType="INTEGER"></result>

@@ -8,11 +8,12 @@ import java.sql.Timestamp;
  * @author dancoder
  */
 @Data
-public class GroupModel {
+public class NotificationDestinationModel {
     private Long id;
     private Long orgId;
+    private Long userId;
     private String type;
     private String name;
-    private String permissions;
+    private String options;
     private Timestamp createdAt;
 }

@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  * @author dancoder
  */
 @Data
-public class AlertSubscriptionsDO {
+public class AlertSubscriptionDO {
     private Long id;
     private Long userId;
     private Long alertId;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dancoder.redash.dao.mapper.AccessPermissionsMapper">
+<mapper namespace="com.dancoder.redash.dao.mapper.AccessPermissionMapper">
     
     <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.AccessPermissionDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>

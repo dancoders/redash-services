@@ -6,7 +6,7 @@ import lombok.Data;
  * @author dancoder
  */
 @Data
-public class AccessPermissionsDO {
+public class AccessPermissionDO {
     private Long id;
     private Long grantorId;
     private Long granteeId;

@@ -7,7 +7,7 @@ import java.sql.Timestamp;
  * @author dancoder
  */
 @Data
-public class DashboardsDO {
+public class DashboardDO {
     private Long id;
     private Long version;
     private Long orgId;

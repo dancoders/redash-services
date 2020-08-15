@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  * @author dancoder
  */
 @Data
-public class ApiKeysDO {
+public class ApiKeyDO {
     private Long id;
     private Long orgId;
     private Long objectId;

@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  * @author dancoder
  */
 @Data
-public class ChangesModel {
+public class ChangeModel {
     private Long id;
     private Long objectVersion;
     private Long userId;

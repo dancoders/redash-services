@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  * @author dancoder
  */
 @Data
-public class ChangesDO {
+public class ChangeDO {
     private Long id;
     private Long objectVersion;
     private Long userId;
