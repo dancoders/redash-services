@@ -3,38 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dancoder.redash.dao.mapper.UserMapper">
-    
-    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.UserDO">
+    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.ApiKeysDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>
         <result column="org_id" property="orgId" jdbcType="INTEGER"></result>
-        <result column="groups" property="groups" jdbcType="INTEGER"></result>
-        <result column="name" property="name" jdbcType="VARCHAR"></result>
-        <result column="email" property="email" jdbcType="VARCHAR"></result>
-        <result column="profile_image_url" property="profileImageUrl" jdbcType="VARCHAR"></result>
-        <result column="password_hash" property="passwordHash" jdbcType="VARCHAR"></result>
         <result column="api_key" property="apiKey" jdbcType="VARCHAR"></result>
-        <result column="disabled_at" property="disabledAt" jdbcType="TIMESTAMP"></result>
+        <result column="created_by_id" property="createdById" jdbcType="INTEGER"></result>
+        <result column="object_id" property="objectId" jdbcType="INTEGER"></result>
+        <result column="object_type" property="objectType" jdbcType="VARCHAR"></result>
+        <result column="active" property="active" jdbcType="BOOLEAN"></result>
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"></result>
         <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"></result>
-        <result column="details" property="details" javaType="Object" typeHandler="com.dancoder.redash.common.JSONTypeHandlerPg"></result>
     </resultMap>
-
-    <select id="getByName" parameterType="string" resultType="com.dancoder.redash.dao.dataobject.UserDO">
-        SELECT *
-        FROM users
-        WHERE name = #{value}
-    </select>
-
-    <select id="getById" parameterType="long" resultType="com.dancoder.redash.dao.dataobject.UserDO">
-        SELECT *
-        FROM users
-        WHERE id = #{value}
-    </select>
-
-    <insert id="insert" parameterType="com.dancoder.redash.dao.dataobject.UserDO">
-        INSERT INTO users(name, age) VALUES (#{name}, #{age})
-        <selectKey resultType="java.lang.Long" keyProperty="id">
-            SELECT LAST_INSERT_ID() AS ID
-        </selectKey>
-    </insert>
 </mapper>

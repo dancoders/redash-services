@@ -6,11 +6,16 @@
     <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.ApiKeysDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>
         <result column="org_id" property="orgId" jdbcType="INTEGER"></result>
+        <result column="slug" property="slug" jdbcType="INTEGER"></result>
+
+
         <result column="api_key" property="apiKey" jdbcType="VARCHAR"></result>
         <result column="created_by_id" property="createdById" jdbcType="INTEGER"></result>
         <result column="object_id" property="objectId" jdbcType="INTEGER"></result>
         <result column="object_type" property="objectType" jdbcType="VARCHAR"></result>
         <result column="active" property="active" jdbcType="BOOLEAN"></result>
+
+
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"></result>
         <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"></result>
     </resultMap>
