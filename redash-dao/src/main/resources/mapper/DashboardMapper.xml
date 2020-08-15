@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dancoder.redash.dao.mapper.UserMapper">
+    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.DashboardsDO">
+        <result column="id" property="id" jdbcType="INTEGER"></result>
+        <result column="org_id" property="orgId" jdbcType="INTEGER"></result>
+        <result column="version" property="version" jdbcType="INTEGER"></result>
+        <result column="user_id" property="userId" jdbcType="INTEGER"></result>
+        <result column="slug" property="slug" jdbcType="VARCHAR"></result>
+        <result column="name" property="name" jdbcType="VARCHAR"></result>
+        <result column="layout" property="layout" jdbcType="VARCHAR"></result>
+        <result column="dashboard_filters_enabled" property="dashboardFiltersEnabled" jdbcType="BOOLEAN"></result>
+        <result column="is_archived" property="isArchived" jdbcType="BOOLEAN"></result>
+        <result column="is_draft" property="isDraft" jdbcType="BOOLEAN"></result>
+        <result column="tags" property="tags" jdbcType="VARCHAR"></result>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"></result>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+</mapper>

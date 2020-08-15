@@ -1,13 +1,14 @@
-package com.dancoder.redash.dao.dataobject;
+package com.dancoder.redash.api.model;
 
 import lombok.Data;
+
 import java.sql.Timestamp;
 
 /**
  * @author dancoder
  */
 @Data
-public class DashboardsDO {
+public class DashboardsModel {
     private Long id;
     private Long version;
     private Long orgId;
@@ -16,7 +17,7 @@ public class DashboardsDO {
     private String name;
     private String layout;
     private String tags;
-    private boolean dashboardFilter;
+    private boolean dashboardFiltersEnabled;
     private boolean isArchived;
     private boolean isDraft;
     private Timestamp createdAt;
