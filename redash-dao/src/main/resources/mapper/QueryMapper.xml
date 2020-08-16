@@ -25,6 +25,5 @@
         <result column="options" property="options" jdbcType="VARCHAR"></result>
         <result column="search_vector" property="searchVector" jdbcType="TSVECTOR"></result>
         <result column="tags" property="tags" jdbcType="VARCHAR"></result>
-
     </resultMap>
 </mapper>

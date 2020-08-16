@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  * @author dancoder
  */
 @Data
-public class WodgetModel {
+public class WidgetModel {
     private Long id;
     private Long visualizationId;
     private String text;

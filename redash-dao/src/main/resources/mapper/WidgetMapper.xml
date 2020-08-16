@@ -3,12 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dancoder.redash.dao.mapper.UserMapper">
-    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.GroupDO">
+    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.WidgetDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>
-        <result column="org_id" property="orgId" jdbcType="INTEGER"></result>
-        <result column="type" property="type" jdbcType="VARCHAR"></result>
-        <result column="name" property="name" jdbcType="VARCHAR"></result>
-        <result column="permissions" property="permissions" jdbcType="VARCHAR"></result>
+        <result column="visualization_id" property="visualizationId" jdbcType="INTEGER"></result>
+        <result column="width" property="width" jdbcType="INTEGER"></result>
+        <result column="dashboard_id" property="dashboardId" jdbcType="INTEGER"></result>
+        <result column="text" property="text" jdbcType="VARCHAR"></result>
+        <result column="options" property="options" jdbcType="VARCHAR"></result>
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"></result>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"></result>
     </resultMap>
 </mapper>
