@@ -1,4 +1,4 @@
-package com.dancoder.redash.config;
+package com.dancoder.redash.framework.config;
 
 
 import org.apache.coyote.http11.Http11NioProtocol;

@@ -16,7 +16,7 @@
         <result column="disabled_at" property="disabledAt" jdbcType="TIMESTAMP"></result>
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"></result>
         <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"></result>
-        <result column="details" property="details" javaType="Object" typeHandler="com.dancoder.redash.common.JSONTypeHandlerPg"></result>
+        <result column="details" property="details" javaType="Object" typeHandler="com.dancoder.redash.framework.common.JSONTypeHandlerPg"></result>
     </resultMap>
 
     <select id="getByName" parameterType="string" resultType="com.dancoder.redash.dao.dataobject.UserDO">

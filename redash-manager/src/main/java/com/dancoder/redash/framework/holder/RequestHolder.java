@@ -1,4 +1,4 @@
-package com.dancoder.redash.holder;
+package com.dancoder.redash.framework.holder;
 
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;

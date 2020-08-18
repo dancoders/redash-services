@@ -1,4 +1,4 @@
-package com.dancoder.redash.config;
+package com.dancoder.redash.framework.config;
 
 import org.springframework.stereotype.Component;
 import tk.mybatis.spring.annotation.MapperScan;

@@ -1,4 +1,4 @@
-package com.dancoder.redash.exception;
+package com.dancoder.redash.framework.exception;
 
 public class RedashException extends RuntimeException{
 

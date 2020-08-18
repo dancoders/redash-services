@@ -1,4 +1,4 @@
-package com.dancoder.redash.object;
+package com.dancoder.redash.framework.object;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

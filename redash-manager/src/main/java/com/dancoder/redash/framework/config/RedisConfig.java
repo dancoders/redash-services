@@ -1,4 +1,4 @@
-package com.dancoder.redash.config;
+package com.dancoder.redash.framework.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

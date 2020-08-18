@@ -1,4 +1,4 @@
-package com.dancoder.redash.config;
+package com.dancoder.redash.framework.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;

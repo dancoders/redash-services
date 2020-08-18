@@ -1,4 +1,4 @@
-package com.dancoder.redash.holder;
+package com.dancoder.redash.framework.holder;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

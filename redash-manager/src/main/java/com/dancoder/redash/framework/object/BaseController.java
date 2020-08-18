@@ -1,4 +1,4 @@
-package com.dancoder.redash.object;
+package com.dancoder.redash.framework.object;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;

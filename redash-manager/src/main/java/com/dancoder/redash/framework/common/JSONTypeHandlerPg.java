@@ -1,4 +1,4 @@
-package com.dancoder.redash.common;
+package com.dancoder.redash.framework.common;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

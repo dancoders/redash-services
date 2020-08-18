@@ -1,9 +1,9 @@
-package com.dancoder.redash.object;
+package com.dancoder.redash.framework.object;
 
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.zyd.blog.business.enums.ResponseStatus;
+import com.dancoder.redash.business.enums.ResponseStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,7 +12,6 @@ import java.util.List;
 
 /**
  * controller返回json
- *
  * @author dancoder
  */
 @Data
