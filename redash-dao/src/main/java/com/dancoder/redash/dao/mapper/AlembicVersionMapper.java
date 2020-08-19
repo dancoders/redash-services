@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * @author dancoder
  */
-@Mapper
 public interface AlembicVersionMapper {
 
 }

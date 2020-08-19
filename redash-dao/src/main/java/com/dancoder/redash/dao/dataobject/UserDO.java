@@ -16,7 +16,7 @@ public class UserDO {
     private String email;
     private String profileImageUrl;
     private String passwordHash;
-    private Long groups;
+    private Object groups;
     private String apiKey;
     private Timestamp disabledAt;
     private Object details;

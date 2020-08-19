@@ -20,6 +20,8 @@ public class UserServiceImpl implements UserService {
 
     private static final BeanCopier copier = BeanCopier.create(UserModel.class, UserDO.class, false);
 
+    private static final BeanCopier copier2 = BeanCopier.create(UserDO.class, UserModel.class, false);
+
     public String getUserName(Long id) {
         UserDO userDO = userMapper.getById(id);
         return userDO != null ? userDO.getName() : null;
@@ -33,4 +35,13 @@ public class UserServiceImpl implements UserService {
         user.setId(id);
         return user;
     }
+
+    @Override
+    public UserModel getUserById(Long id) {
+        UserDO userDO = userMapper.getById(id);
+        UserModel userModel = new UserModel();
+        copier2.copy(userDO, userModel, null);
+        return userModel;
+    }
+
 }

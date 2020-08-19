@@ -2,10 +2,7 @@ package com.dancoder.redash.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.dancoder.redash.api.UserService;
 import com.dancoder.redash.api.model.UserModel;
@@ -15,14 +12,15 @@ import com.dancoder.redash.api.model.UserModel;
  */
 @Component
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/username")
-    public String getUserName(@RequestParam("id") Long id) {
-        return userService.getUserName(id);
+    @RequestMapping("/username/{id}")
+    public UserModel getUserName(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
 
     @RequestMapping("/add")
@@ -30,7 +28,6 @@ public class UserController {
     public UserModel addUser(@RequestParam("name") String name, @RequestParam("age") Integer age) {
         UserModel user = new UserModel();
         user.setName(name);
-        user.setAge(age);
         return userService.addUser(user);
     }
 }

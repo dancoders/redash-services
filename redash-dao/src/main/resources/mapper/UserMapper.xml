@@ -7,7 +7,7 @@
     <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.UserDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>
         <result column="org_id" property="orgId" jdbcType="INTEGER"></result>
-        <result column="groups" property="groups" jdbcType="INTEGER"></result>
+        <result column="groups" property="groups" jdbcType="VARCHAR"></result>
         <result column="name" property="name" jdbcType="VARCHAR"></result>
         <result column="email" property="email" jdbcType="VARCHAR"></result>
         <result column="profile_image_url" property="profileImageUrl" jdbcType="VARCHAR"></result>

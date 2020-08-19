@@ -6,12 +6,11 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * @author dancoder
  */
-@Mapper
 public interface UserMapper {
 
     UserDO getByName(String name);
 
     UserDO getById(Long id);
-
+ 
     Long insert(UserDO userDO);
 }

@@ -11,4 +11,6 @@ public interface UserService {
     String getUserName(Long id);
 
     UserModel addUser(UserModel user);
+
+    UserModel getUserById(Long id);
 }
