@@ -12,12 +12,16 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class PageResult {
-    private Long total;
-    private List rows;
+    private Integer count;
+    private Integer page;
+    private Integer pageSize;
+    private List results;
 
-    public PageResult(Long total, List rows) {
-        this.total = total;
-        this.rows = rows;
+    public PageResult(Integer count, Integer page, Integer pageSize, List results) {
+        this.count = count;
+        this.page = page;
+        this.pageSize = pageSize;
+        this.results = results;
     }
 
     public PageResult() {

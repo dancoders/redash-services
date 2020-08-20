@@ -3,6 +3,8 @@ package com.dancoder.redash.api;
 
 import com.dancoder.redash.api.model.UserModel;
 
+import java.util.List;
+
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
  */

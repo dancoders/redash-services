@@ -30,6 +30,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.redash</groupId>
+            <artifactId>redash-manager</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- MyBatis start  -->
         <dependency>
             <groupId>org.mybatis</groupId>
