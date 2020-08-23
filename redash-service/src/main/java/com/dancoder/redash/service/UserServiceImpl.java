@@ -12,7 +12,6 @@ import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,18 +24,20 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    private static final BeanCopier copier = BeanCopier.create(UserModel.class, UserDO.class, false);
+    private static final BeanCopier COPIER = BeanCopier.create(UserModel.class, UserDO.class, false);
 
-    private static final BeanCopier copier2 = BeanCopier.create(UserDO.class, UserModel.class, false);
+    private static final BeanCopier COPIER2 = BeanCopier.create(UserDO.class, UserModel.class, false);
 
+    @Override
     public String getUserName(Long id) {
         UserDO userDO = userMapper.getById(id);
         return userDO != null ? userDO.getName() : null;
     }
 
+    @Override
     public UserModel addUser(UserModel user) {
         UserDO userDO = new UserDO();
-        copier.copy(user, userDO, null);
+        COPIER.copy(user, userDO, null);
 
         Long id = userMapper.insert(userDO);
         user.setId(id);
@@ -47,7 +48,7 @@ public class UserServiceImpl implements UserService {
     public UserModel getUserById(Long id) {
         UserDO userDO = userMapper.getById(id);
         UserModel userModel = new UserModel();
-        copier2.copy(userDO, userModel, null);
+        COPIER2.copy(userDO, userModel, null);
         return userModel;
     }
 
@@ -56,6 +57,10 @@ public class UserServiceImpl implements UserService {
         PageHelper.startPage(vo.getPage(), vo.getPageSize());
         List<UserDO> list = userMapper.findUsersByCondition(vo);
         List<UserModel> resultList = geProperties(list);
+        if (null == resultList) {
+            return null;
+        }
+
         PageResult pageResult = new PageResult(
                 resultList.size(),
                 vo.getPage(),
@@ -71,7 +76,9 @@ public class UserServiceImpl implements UserService {
         }
         List<UserModel> resultList = new LinkedList<>();
         for (UserDO user : list) {
-//            resultList.add(new UserModel(user));
+            UserModel userModel = new UserModel();
+            COPIER2.copy(user,userModel,null);
+            resultList.add(userModel);
         }
         return resultList;
     }
