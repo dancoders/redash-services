@@ -1,7 +1,9 @@
 package com.dancoder.redash.dao.mapper;
 
+import com.dancoder.redash.business.vo.UserConditionVO;
 import com.dancoder.redash.dao.dataobject.UserDO;
-import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author dancoder
@@ -13,4 +15,6 @@ public interface UserMapper {
     UserDO getById(Long id);
  
     Long insert(UserDO userDO);
+
+    List<UserDO> findUsersByCondition(UserConditionVO vo);
 }

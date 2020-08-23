@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
  */
@@ -37,7 +35,7 @@ public class UserController {
     @GetMapping("/users")
     @ResponseBody
     public PageResult userList(UserConditionVO vo){
-//        List result = userService.listUser(vo);
+        PageResult result = userService.listUser(vo);
         return null;
     }
 }

@@ -30,6 +30,10 @@
         FROM users
         WHERE id = #{value}
     </select>
+    
+    <select id="findUsersByCondition" parameterType="com.dancoder.redash.business.vo.UserConditionVO" resultMap="baseResultMap">
+        select * from users
+    </select>
 
     <insert id="insert" parameterType="com.dancoder.redash.dao.dataobject.UserDO">
         INSERT INTO users(name, age) VALUES (#{name}, #{age})
