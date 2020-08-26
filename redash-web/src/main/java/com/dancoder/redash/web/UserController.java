@@ -36,6 +36,6 @@ public class UserController {
     @ResponseBody
     public PageResult userList(UserConditionVO vo){
         PageResult result = userService.listUser(vo);
-        return null;
+        return result;
     }
 }
