@@ -5,6 +5,7 @@ import com.dancoder.redash.api.model.UserModel;
 import com.dancoder.redash.business.vo.UserConditionVO;
 import com.dancoder.redash.dao.dataobject.UserDO;
 import com.dancoder.redash.dao.mapper.UserMapper;
+import com.dancoder.redash.framework.exception.RedashException;
 import com.dancoder.redash.framework.object.PageResult;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ public class UserServiceImpl implements UserService {
 
     private static final BeanCopier COPIER2 = BeanCopier.create(UserDO.class, UserModel.class, false);
 
+    private static final String emailSymbol = "@";
+
+    private static final String qqEmailDoMain = "qq.com";
+
     @Override
     public String getUserName(Long id) {
         UserDO userDO = userMapper.getById(id);
@@ -36,10 +41,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserModel addUser(UserModel user) {
+        String email = user.getEmail();
+        if (! email.contains(emailSymbol)) {
+            throw new RedashException("bad email address.");
+        }
+
+        String[] address = email.split(emailSymbol, 1);
+
+        if (address[1].toLowerCase() == qqEmailDoMain) {
+            throw new RedashException("bad email address.");
+        }
+
         UserDO userDO = new UserDO();
         COPIER.copy(user, userDO, null);
 
+        userDO.setOrgId(1L);
+        userDO.setGroups("{2}");
+        userDO.setApiKey("");
+        userDO.setDetails("{\"is_invitation_pending\": true}");
         Long id = userMapper.insert(userDO);
+
         user.setId(id);
         return user;
     }

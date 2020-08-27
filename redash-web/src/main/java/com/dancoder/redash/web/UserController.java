@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
  */
 @Component
 @RestController
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -24,11 +23,12 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @RequestMapping("/add")
+    @RequestMapping("/users")
     @ResponseBody
-    public UserModel addUser(@RequestParam("name") String name, @RequestParam("age") Integer age) {
+    public UserModel addUser(@RequestParam("name") String name, @RequestParam("email") String email) {
         UserModel user = new UserModel();
         user.setName(name);
+        user.setEmail(email);
         return userService.addUser(user);
     }
 
@@ -37,5 +37,11 @@ public class UserController {
     public PageResult userList(UserConditionVO vo){
         PageResult result = userService.listUser(vo);
         return result;
+    }
+
+    @PostMapping("/users/{id}/disable")
+    @ResponseBody
+    public void disabled(@PathVariable String id){
+
     }
 }
