@@ -1,4 +1,4 @@
-package com.dancoder.redash.framework.common;
+package com.dancoder.redash.framework.handle.mybatis;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @MappedTypes(Object.class)
-public class JSONTypeHandlerPg extends BaseTypeHandler<Object> {
+public class JSONTypeHandler extends BaseTypeHandler<Object> {
 
     private static final PGobject jsonObject = new PGobject();
 
