@@ -26,8 +26,6 @@
         WHERE name = #{value}
     </select>
 
-
-
     <select id="getById" parameterType="long" resultType="com.dancoder.redash.dao.dataobject.UserDO">
         SELECT *
         FROM users

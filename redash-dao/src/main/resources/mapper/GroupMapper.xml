@@ -11,4 +11,15 @@
         <result column="permissions" property="permissions" jdbcType="VARCHAR"></result>
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"></result>
     </resultMap>
+
+    <select id="getById" parameterType="long" resultType="com.dancoder.redash.dao.dataobject.GroupDO">
+        SELECT *
+        FROM groups
+        WHERE id = #{value}
+    </select>
+
+    <select id="getAll" resultMap="baseResultMap">
+        select * from groups
+    </select>
+
 </mapper>
