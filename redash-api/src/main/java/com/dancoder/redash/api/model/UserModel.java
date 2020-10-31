@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author dancoder
@@ -17,7 +18,7 @@ public class UserModel {
     private String email;
     private String profileImageUrl;
     private String passwordHash;
-    private String groups;
+    private List groups;
     private String apiKey;
     private Date disabledAt;
     private JSONObject details;

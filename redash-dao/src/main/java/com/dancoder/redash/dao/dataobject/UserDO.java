@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author dancoder
@@ -16,7 +17,7 @@ public class UserDO {
     private String email;
     private String profileImageUrl;
     private String passwordHash;
-    private String groups;
+    private Integer[] groups;
     private String apiKey;
     private Timestamp disabledAt;
     private Object details;
@@ -24,4 +25,6 @@ public class UserDO {
     private Timestamp updatedAt;
 
     // PG json 使用model、mapper、以及数据操作时的写法：https://blog.csdn.net/weixin_42800689/article/details/91413254
+
+    // https://www.cnblogs.com/kylindai/p/3563818.html
 }

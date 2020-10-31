@@ -7,7 +7,8 @@
     <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.UserDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>
         <result column="org_id" property="orgId" jdbcType="INTEGER"></result>
-        <result column="groups" property="groups" jdbcType="VARCHAR"></result>
+        <result column="groups" property="groups"
+                typeHandler="com.dancoder.redash.framework.handle.mybatis.ArrayTypeHandler"></result>
         <result column="name" property="name" jdbcType="VARCHAR"></result>
         <result column="email" property="email" jdbcType="VARCHAR"></result>
         <result column="profile_image_url" property="profileImageUrl" jdbcType="VARCHAR"></result>
@@ -16,7 +17,7 @@
         <result column="disabled_at" property="disabledAt" jdbcType="TIMESTAMP"></result>
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"></result>
         <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"></result>
-        <result column="details" property="details" javaType="Object" typeHandler="com.dancoder.redash.framework.common.JSONTypeHandlerPg"></result>
+        <result column="details" property="details" javaType="Object" typeHandler="com.dancoder.redash.framework.handle.mybatis.JSONTypeHandler"></result>
     </resultMap>
 
     <select id="getByName" parameterType="string" resultType="com.dancoder.redash.dao.dataobject.UserDO">
@@ -24,6 +25,8 @@
         FROM users
         WHERE name = #{value}
     </select>
+
+
 
     <select id="getById" parameterType="long" resultType="com.dancoder.redash.dao.dataobject.UserDO">
         SELECT *
@@ -37,7 +40,9 @@
 
     <insert id="insert" parameterType="com.dancoder.redash.dao.dataobject.UserDO">
         INSERT INTO users(name, email, org_id, password_hash, groups, api_key, details)
-        VALUES (#{name}, #{email}, #{orgId}, #{passwordHash}, #{groups}, #{apiKey}, #{details})
+        VALUES (#{name}, #{email}, #{orgId}, #{passwordHash},
+        #{groups,jdbcType=ARRAY, typeHandler=com.dancoder.redash.framework.handle.mybatis.ArrayTypeHandler},
+        #{apiKey}, #{details})
         <selectKey resultType="java.lang.Long" keyProperty="id">
             SELECT LAST_INSERT_ID() AS ID
         </selectKey>

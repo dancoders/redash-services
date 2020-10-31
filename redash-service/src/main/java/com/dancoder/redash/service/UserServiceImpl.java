@@ -1,5 +1,7 @@
 package com.dancoder.redash.service;
 
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONObject;
 import com.dancoder.redash.api.UserService;
 import com.dancoder.redash.api.model.UserModel;
 import com.dancoder.redash.business.vo.UserConditionVO;
@@ -56,7 +58,7 @@ public class UserServiceImpl implements UserService {
         COPIER.copy(user, userDO, null);
 
         userDO.setOrgId(1L);
-        userDO.setGroups("{2}");
+        userDO.setGroups(null);
         userDO.setApiKey("");
         userDO.setDetails("{\"is_invitation_pending\": true}");
         Long id = userMapper.insert(userDO);
@@ -77,16 +79,16 @@ public class UserServiceImpl implements UserService {
     public PageResult listUser(UserConditionVO vo) {
         PageHelper.startPage(vo.getPage(), vo.getPageSize());
         List<UserDO> list = userMapper.findUsersByCondition(vo);
-        List<UserModel> resultList = geProperties(list);
-        if (null == resultList) {
+        List<UserModel> userList = geProperties(list);
+        if (null == userList) {
             return null;
         }
 
         PageResult pageResult = new PageResult(
-                resultList.size(),
+                userList.size(),
                 vo.getPage(),
                 vo.getPageSize(),
-                resultList
+                userList
         );
         return pageResult;
     }
@@ -98,6 +100,13 @@ public class UserServiceImpl implements UserService {
         List<UserModel> resultList = new LinkedList<>();
         for (UserDO user : list) {
             UserModel userModel = new UserModel();
+
+            JSONArray jsonObject = new JSONArray(user.getGroups());
+            for (Object object : jsonObject) {
+
+            }
+
+
             COPIER2.copy(user,userModel,null);
             resultList.add(userModel);
         }
