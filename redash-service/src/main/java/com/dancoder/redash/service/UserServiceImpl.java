@@ -13,6 +13,7 @@ import com.dancoder.redash.dao.mapper.UserMapper;
 import com.dancoder.redash.framework.exception.RedashException;
 import com.dancoder.redash.framework.object.PageResult;
 import com.github.pagehelper.PageHelper;
+import com.google.inject.internal.util.$Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Component;
@@ -69,6 +70,10 @@ public class UserServiceImpl implements UserService {
 
         user.setId(id);
         return user;
+    }
+
+    private void inviteUser(UserModel userModel){
+        String inviteUrl = "";
     }
 
     @Override
