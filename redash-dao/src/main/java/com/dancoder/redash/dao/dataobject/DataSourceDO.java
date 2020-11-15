@@ -15,6 +15,6 @@ public class DataSourceDO {
     private String type;
     private String queueName;
     private String scheduledQueueName;
-    private byte encryptedOptions;
+    private Object options;
     private Timestamp createdAt;
 }

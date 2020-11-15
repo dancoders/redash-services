@@ -1,7 +1,5 @@
 package com.dancoder.redash.service;
 
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
 import com.dancoder.redash.api.UserService;
 import com.dancoder.redash.api.model.GroupModel;
 import com.dancoder.redash.api.model.UserModel;
@@ -13,7 +11,6 @@ import com.dancoder.redash.dao.mapper.UserMapper;
 import com.dancoder.redash.framework.exception.RedashException;
 import com.dancoder.redash.framework.object.PageResult;
 import com.github.pagehelper.PageHelper;
-import com.google.inject.internal.util.$Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Component;

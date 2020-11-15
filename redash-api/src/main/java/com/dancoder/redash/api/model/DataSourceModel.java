@@ -10,11 +10,10 @@ import java.sql.Timestamp;
 @Data
 public class DataSourceModel {
     private Long id;
-    private Long orgId;
     private String name;
+    private String pause_reason;
+    private Integer paused;
+    private String syntax;
     private String type;
-    private String queueName;
-    private String scheduledQueueName;
-    private byte encryptedOptions;
-    private Timestamp createdAt;
+    private boolean view_only;
 }
