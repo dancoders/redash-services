@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author dancoder
+ */
 @Component
 public class DataSourceServiceImpl implements DataSourceService {
 
@@ -37,6 +40,8 @@ public class DataSourceServiceImpl implements DataSourceService {
 
             AbstractQueryStrategy queryRunner = QueryRunner.
                     getQueryStrategyByType(dataSource.getType());
+
+            dataSource.getOptions();
 
             model.setSyntax(queryRunner.getSyntax());
             model.setPaused(0);

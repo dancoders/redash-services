@@ -2,7 +2,7 @@ package com.dancoder.redash.business.enums;
 
 import com.dancoder.redash.business.queryrunner.AbstractQueryStrategy;
 import com.dancoder.redash.business.queryrunner.MysqlQueryStrategy;
-import com.dancoder.redash.business.queryrunner.PgQueryStrategy;
+import com.dancoder.redash.business.queryrunner.GreenPlumQueryStrategy;
 
 /**
  * @author dancoder
@@ -18,7 +18,7 @@ public enum QueryRunner {
     /**
      * postgres
      */
-    PG("postgres", new PgQueryStrategy());
+    PG("postgres", new GreenPlumQueryStrategy());
 
     private final String type;
     private final AbstractQueryStrategy queryStrategy;
