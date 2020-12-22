@@ -7,6 +7,8 @@ import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourcePrope
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory;
+import com.dancoder.redash.business.enums.QueryRunner;
+import com.dancoder.redash.business.queryrunner.AbstractQueryStrategy;
 import com.dancoder.redash.framework.handle.provider.AbstractMyJdbcDataSourceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +24,6 @@ import java.util.Map;
  */
 @Configuration
 public class MybatisPlusConfig {
-
-    public static final String DRIVER_CLASS_NAME_MYSQL = "com.mysql.cj.jdbc.Driver";
 
     /**
      * 配置文件数据的松散绑定
@@ -61,12 +61,12 @@ public class MybatisPlusConfig {
                     String port = option.getString("port");
 //                    {"db":"dblog_test","host":"localhost","passwd":"--------","port":3306,"user":"root"}
 
-                    String url = "jdbc:"+ type +"://"+ host +":"+ port +"/" + dbName +
-                            "?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&useSSL=false";
+                    AbstractQueryStrategy queryStrategy = QueryRunner.getQueryStrategyByType(type);
+                    String jdbcUrl = queryStrategy.getJdbcUrl(host, port, dbName);
 
                     DataSourceProperty property = new DataSourceProperty();
-                    property.setDriverClassName(DRIVER_CLASS_NAME_MYSQL);
-                    property.setUrl(url);
+                    property.setDriverClassName(queryStrategy.getDriverName());
+                    property.setUrl(jdbcUrl);
                     property.setUsername(userName);
                     property.setPassword(password);
                     map.put(name, property);

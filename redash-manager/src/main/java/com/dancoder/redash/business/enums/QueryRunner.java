@@ -21,6 +21,7 @@ public enum QueryRunner {
     PG("postgres", new GreenPlumQueryStrategy());
 
     private final String type;
+
     private final AbstractQueryStrategy queryStrategy;
 
     QueryRunner(String type, AbstractQueryStrategy queryStrategy) {

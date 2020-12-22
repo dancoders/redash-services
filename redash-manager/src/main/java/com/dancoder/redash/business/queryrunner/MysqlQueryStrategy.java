@@ -14,20 +14,18 @@ public class MysqlQueryStrategy extends AbstractQueryStrategy{
 
     private static final Log logger = LogFactory.get();
 
-    private final static String DRIVER_NAME = "com.mysql.jdbc.Driver";
-
     @Override
     public String getSyntax() {
         return "sql";
     }
 
     @Override
-    public String getType() {
-        return "mysql";
+    public String getDriverName() {
+        return "com.mysql.cj.jdbc.Driver";
     }
 
     @Override
-    public JSONObject getTables(int dataSourceId) {
+    public String getTables(int dataSourceId) {
         StringBuffer sbSql = new StringBuffer()
                 .append("SELECT col.table_schema as table_schema,")
                 .append("col.table_name as table_name,")
@@ -35,42 +33,13 @@ public class MysqlQueryStrategy extends AbstractQueryStrategy{
                 .append("FROM `information_schema`.`columns` col")
                 .append("WHERE col.table_schema NOT IN")
                 .append("('information_schema', 'performance_schema', 'mysql', 'sys');");
-
-        // TODO executeSql
-        return null;
+        return sbSql.toString();
     }
 
     @Override
     public String getJdbcUrl(String ip, String port, String dbName) {
-        return "jdbc:mysql://" + ip + ":" + port + "/" + dbName + "?useUnicode=true&characterEncoding=utf-8";
-    }
-
-    @Override
-    public Connection getConnection(String jdbcUrl, String userName, String password) throws SQLException {
-        Connection conn = null;
-
-        try {
-            Class.forName(DRIVER_NAME);
-            conn = DriverManager.getConnection(jdbcUrl, userName, password);
-        } catch (Exception e) {
-            logger.info("mysql 连接失败", e);
-        }
-
-        return conn;
-    }
-
-    @Override
-    public ResultSet executeSql(Connection conn, String sql) {
-        ResultSet resultSet = null;
-        
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            resultSet = preparedStatement.getResultSet();
-        } catch (SQLException e) {
-            logger.info("执行sql 失败", e);
-        }
-
-        return resultSet;
+        return "jdbc:mysql://" + ip + ":" + port + "/" + dbName +
+                "?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&useSSL=false";
     }
 
 }

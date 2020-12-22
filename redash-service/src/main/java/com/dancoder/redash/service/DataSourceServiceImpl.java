@@ -7,10 +7,12 @@ import com.dancoder.redash.business.queryrunner.AbstractQueryStrategy;
 import com.dancoder.redash.dao.dataobject.DataSourceDO;
 import com.dancoder.redash.dao.mapper.DataSourceMapper;
 import com.dancoder.redash.dao.mapper.GroupMapper;
+import com.dancoder.redash.dao.mapper.QuerySqlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Component;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class DataSourceServiceImpl implements DataSourceService {
 
     @Autowired
     private DataSourceMapper dataSourceMapper;
+    @Autowired
+    private QuerySqlMapper querySqlMapper;
 
     private static final BeanCopier COPIER = BeanCopier.create(
             DataSourceDO.class, DataSourceModel.class, false
@@ -29,6 +33,10 @@ public class DataSourceServiceImpl implements DataSourceService {
 
     @Override
     public List<DataSourceModel> getList() {
+        // TODO test
+        String sql = "select * form biz_article;";
+        List<LinkedHashMap<String, Object>> linkedHashMaps = querySqlMapper.customQuery(sql);
+
         // 模拟当前用户groupId = 1 admin权限组 TODO
         Long groupId = 1L;
         // 组装dataSourceModel
