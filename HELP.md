@@ -1,5 +1,16 @@
 # Getting Started
 
+# 通用自定义查询
+```java
+@Autowired
+private QuerySqlMapper querySqlMapper;
+
+DynamicDataSourceContextHolder.push("test");
+String sql = "select * from biz_article;";
+List<LinkedHashMap<String, Object>> linkedHashMaps = querySqlMapper.customQuery(sql);
+```
+
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 

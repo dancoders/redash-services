@@ -1,5 +1,6 @@
 package com.dancoder.redash.service;
 
+import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.dancoder.redash.api.DataSourceService;
 import com.dancoder.redash.api.model.DataSourceModel;
 import com.dancoder.redash.business.enums.QueryRunner;
@@ -34,8 +35,10 @@ public class DataSourceServiceImpl implements DataSourceService {
     @Override
     public List<DataSourceModel> getList() {
         // TODO test
-        String sql = "select * form biz_article;";
-        List<LinkedHashMap<String, Object>> linkedHashMaps = querySqlMapper.customQuery(sql);
+
+//        DynamicDataSourceContextHolder.push("test");
+//        String sql = "select * from biz_article;";
+//        List<LinkedHashMap<String, Object>> linkedHashMaps = querySqlMapper.customQuery(sql);
 
         // 模拟当前用户groupId = 1 admin权限组 TODO
         Long groupId = 1L;
