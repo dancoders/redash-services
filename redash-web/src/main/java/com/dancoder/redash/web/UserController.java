@@ -23,7 +23,7 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @RequestMapping("/users")
+    @PostMapping("/users")
     @ResponseBody
     public UserModel addUser(@RequestParam("name") String name, @RequestParam("email") String email) {
         UserModel user = new UserModel();

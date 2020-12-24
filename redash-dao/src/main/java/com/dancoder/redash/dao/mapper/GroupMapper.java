@@ -1,11 +1,11 @@
 package com.dancoder.redash.dao.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dancoder.redash.dao.dataobject.GroupDO;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-public interface GroupMapper {
+public interface GroupMapper extends BaseMapper<GroupDO> {
 
     List<GroupDO> getAll();
 

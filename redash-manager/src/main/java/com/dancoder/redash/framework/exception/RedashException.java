@@ -1,5 +1,8 @@
 package com.dancoder.redash.framework.exception;
 
+/**
+ * @author dancoder
+ */
 public class RedashException extends RuntimeException{
 
     /**

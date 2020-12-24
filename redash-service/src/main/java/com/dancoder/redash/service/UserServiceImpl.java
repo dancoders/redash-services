@@ -1,5 +1,8 @@
 package com.dancoder.redash.service;
 
+import cn.hutool.core.lang.Assert;
+import cn.hutool.crypto.digest.DigestUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dancoder.redash.api.UserService;
 import com.dancoder.redash.api.model.GroupModel;
 import com.dancoder.redash.api.model.UserModel;
@@ -16,16 +19,14 @@ import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
- * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
+ * @author dancoder
  */
 @Component
-public class UserServiceImpl implements UserService {
-
-    @Autowired
-    private UserMapper userMapper;
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements UserService {
 
     @Autowired
     private GroupMapper groupMapper;
@@ -38,8 +39,23 @@ public class UserServiceImpl implements UserService {
     private static final String qqEmailDoMain = "qq.com";
 
     @Override
+    public boolean login(String email, String password) {
+        UserDO user = baseMapper.getByEmail(email);
+        Assert.isNull(user, "用户不存在");
+
+        String pass = DigestUtil.md5Hex("yc" + user.getName());
+        if (pass.equals(user.getPasswordHash())) {
+            // 写入session
+
+        } else {
+            throw new RedashException("密码错误");
+        }
+        return true;
+    }
+
+    @Override
     public String getUserName(Long id) {
-        UserDO userDO = userMapper.getById(id);
+        UserDO userDO = baseMapper.selectById(id);
         return userDO != null ? userDO.getName() : null;
     }
 
@@ -52,30 +68,30 @@ public class UserServiceImpl implements UserService {
 
         String[] address = email.split(emailSymbol, 1);
 
-        if (address[1].toLowerCase() == qqEmailDoMain) {
+        if (address[0].toLowerCase() == qqEmailDoMain) {
             throw new RedashException("bad email address.");
         }
 
         UserDO userDO = new UserDO();
         COPIER.copy(user, userDO, null);
 
+        // 默认生成密码：yc + 用户名
+        String pass = DigestUtil.md5Hex("yc" + user.getName());
+
+        userDO.setPasswordHash(pass);
         userDO.setOrgId(1L);
         userDO.setGroups(null);
         userDO.setApiKey("");
-        userDO.setDetails("{\"is_invitation_pending\": true}");
-        Long id = userMapper.insert(userDO);
+        userDO.setPasswordHash("");
+        userDO.setDetails(null);
 
-        user.setId(id);
+        baseMapper.insert(userDO);
         return user;
-    }
-
-    private void inviteUser(UserModel userModel){
-        String inviteUrl = "";
     }
 
     @Override
     public UserModel getUserById(Long id) {
-        UserDO userDO = userMapper.getById(id);
+        UserDO userDO = baseMapper.selectById(id);
         UserModel userModel = new UserModel();
         COPIER2.copy(userDO, userModel, null);
         return userModel;
@@ -84,7 +100,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public PageResult listUser(UserConditionVO vo) {
         PageHelper.startPage(vo.getPage(), vo.getPageSize());
-        List<UserDO> list = userMapper.findUsersByCondition(vo);
+        List<UserDO> list = baseMapper.findUsersByCondition(vo);
         List<UserModel> userList = geProperties(list);
         if (null == userList) {
             return null;

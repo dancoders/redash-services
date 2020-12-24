@@ -1,10 +1,10 @@
 package com.dancoder.redash.dao.mapper;
 
-import lombok.Data;
-import org.apache.ibatis.annotations.Mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.dancoder.redash.dao.dataobject.WidgetDO;
 
 /**
  * @author dancoder
  */
-public interface WidgetMapper {
+public interface WidgetMapper extends BaseMapper<WidgetDO> {
 }

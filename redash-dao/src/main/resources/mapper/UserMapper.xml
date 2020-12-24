@@ -20,16 +20,10 @@
         <result column="details" property="details" javaType="Object" typeHandler="com.dancoder.redash.framework.handle.mybatis.JSONTypeHandler"></result>
     </resultMap>
 
-    <select id="getByName" parameterType="string" resultType="com.dancoder.redash.dao.dataobject.UserDO">
+    <select id="getByEmail" parameterType="string" resultType="com.dancoder.redash.dao.dataobject.UserDO">
         SELECT *
         FROM users
-        WHERE name = #{value}
-    </select>
-
-    <select id="getById" parameterType="long" resultType="com.dancoder.redash.dao.dataobject.UserDO">
-        SELECT *
-        FROM users
-        WHERE id = #{value}
+        WHERE email = #{email}
     </select>
     
     <select id="findUsersByCondition" parameterType="com.dancoder.redash.business.vo.UserConditionVO" resultMap="baseResultMap">

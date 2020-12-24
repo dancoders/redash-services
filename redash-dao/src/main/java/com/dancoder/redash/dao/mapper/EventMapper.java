@@ -1,6 +1,7 @@
 package com.dancoder.redash.dao.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.dancoder.redash.dao.dataobject.EventDO;
 
-public interface EventMapper {
+public interface EventMapper extends BaseMapper<EventDO> {
 }
