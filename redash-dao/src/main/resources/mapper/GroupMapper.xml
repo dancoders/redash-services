@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dancoder.redash.dao.mapper.GroupMapper">
-    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.GroupDO">
+    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.entity.GroupDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>
         <result column="org_id" property="orgId" jdbcType="INTEGER"></result>
         <result column="type" property="type" jdbcType="VARCHAR"></result>
@@ -12,7 +12,7 @@
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"></result>
     </resultMap>
 
-    <select id="getById" parameterType="long" resultType="com.dancoder.redash.dao.dataobject.GroupDO">
+    <select id="getById" parameterType="long" resultType="com.dancoder.redash.dao.entity.GroupDO">
         SELECT *
         FROM groups
         WHERE id = #{value}

@@ -13,10 +13,11 @@ spring:
     name: redash
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: com.dancoder.redash.dao.dataobject.**
+  type-aliases-package: com.dancoder.redash.dao.entity.**
   configuration:
     auto-mapping-behavior: full
     call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 logging:
   level:
     com.baomidou.mybatisplus.samples.quickstart: debug

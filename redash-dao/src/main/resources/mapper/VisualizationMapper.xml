@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dancoder.redash.dao.mapper.VisualizationMapper">
-    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.VisualizationDO">
+    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.entity.VisualizationDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>
         <result column="query_id" property="queryId" jdbcType="INTEGER"></result>
         <result column="name" property="name" jdbcType="VARCHAR"></result>

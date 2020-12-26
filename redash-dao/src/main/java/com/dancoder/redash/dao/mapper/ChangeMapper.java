@@ -1,9 +1,7 @@
 package com.dancoder.redash.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.dancoder.redash.dao.dataobject.ChangeDO;
-import lombok.Data;
-import org.apache.ibatis.annotations.Mapper;
+import com.dancoder.redash.dao.entity.ChangeDO;
 
 /**
  * @author dancoder

@@ -4,7 +4,7 @@ package com.dancoder.redash.api;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dancoder.redash.api.model.UserModel;
 import com.dancoder.redash.business.vo.UserConditionVO;
-import com.dancoder.redash.dao.dataobject.UserDO;
+import com.dancoder.redash.dao.entity.UserDO;
 import com.dancoder.redash.framework.object.PageResult;
 
 /**
@@ -29,10 +29,11 @@ public interface UserService extends IService<UserDO> {
 
     /**
      * 增加用户
-     * @param user
+     * @param name
+     * @param email
      * @return
      */
-    UserModel addUser(UserModel user);
+    UserModel addUser(String name, String email);
 
     /**
      * 根据id获取

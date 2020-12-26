@@ -1,7 +1,7 @@
 package com.dancoder.redash.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.dancoder.redash.dao.dataobject.FavoriteDO;
+import com.dancoder.redash.dao.entity.FavoriteDO;
 
 /**
  * @author dancoder

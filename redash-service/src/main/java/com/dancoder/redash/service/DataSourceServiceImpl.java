@@ -1,19 +1,16 @@
 package com.dancoder.redash.service;
 
-import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.dancoder.redash.api.DataSourceService;
 import com.dancoder.redash.api.model.DataSourceModel;
 import com.dancoder.redash.business.enums.QueryRunner;
 import com.dancoder.redash.business.queryrunner.AbstractQueryStrategy;
-import com.dancoder.redash.dao.dataobject.DataSourceDO;
+import com.dancoder.redash.dao.entity.DataSourceDO;
 import com.dancoder.redash.dao.mapper.DataSourceMapper;
-import com.dancoder.redash.dao.mapper.GroupMapper;
 import com.dancoder.redash.dao.mapper.QuerySqlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 

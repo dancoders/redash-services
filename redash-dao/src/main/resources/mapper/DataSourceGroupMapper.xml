@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dancoder.redash.dao.mapper.DataSourceGroupMapper">
-    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.DataSourceGroupDO">
+    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.entity.DataSourceGroupDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>
         <result column="data_source_id" property="dataSourceId" jdbcType="INTEGER"></result>
         <result column="group_id" property="groupId" jdbcType="INTEGER"></result>

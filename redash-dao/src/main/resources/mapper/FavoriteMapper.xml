@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dancoder.redash.dao.mapper.FavoriteMapper">
-    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.dataobject.FavoriteDO">
+    <resultMap id="baseResultMap" type="com.dancoder.redash.dao.entity.FavoriteDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>
         <result column="org_id" property="orgId" jdbcType="INTEGER"></result>
         <result column="user_id" property="userId" jdbcType="INTEGER"></result>

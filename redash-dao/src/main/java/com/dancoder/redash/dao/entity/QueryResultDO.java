@@ -1,12 +1,9 @@
-package com.dancoder.redash.dao.dataobject;
+package com.dancoder.redash.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 

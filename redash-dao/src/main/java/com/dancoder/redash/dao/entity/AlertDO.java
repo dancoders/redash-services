@@ -1,4 +1,4 @@
-package com.dancoder.redash.dao.dataobject;
+package com.dancoder.redash.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

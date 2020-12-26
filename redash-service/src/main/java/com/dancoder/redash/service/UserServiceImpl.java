@@ -1,39 +1,37 @@
 package com.dancoder.redash.service;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.baomidou.dynamic.datasource.annotation.Master;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dancoder.redash.api.UserService;
 import com.dancoder.redash.api.model.GroupModel;
 import com.dancoder.redash.api.model.UserModel;
 import com.dancoder.redash.business.vo.UserConditionVO;
-import com.dancoder.redash.dao.dataobject.GroupDO;
-import com.dancoder.redash.dao.dataobject.UserDO;
+import com.dancoder.redash.dao.entity.GroupDO;
+import com.dancoder.redash.dao.entity.UserDO;
 import com.dancoder.redash.dao.mapper.GroupMapper;
 import com.dancoder.redash.dao.mapper.UserMapper;
-import com.dancoder.redash.framework.exception.RedashException;
+import com.dancoder.redash.framework.exception.RedashBadRequestException;
 import com.dancoder.redash.framework.object.PageResult;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.sql.Timestamp;
 import java.util.*;
 
 /**
  * @author dancoder
  */
+@Master
 @Component
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements UserService {
 
     @Autowired
     private GroupMapper groupMapper;
-
-    private static final BeanCopier COPIER = BeanCopier.create(UserModel.class, UserDO.class, false);
-    private static final BeanCopier COPIER2 = BeanCopier.create(UserDO.class, UserModel.class, false);
-    private static final BeanCopier GROUP_COPIER = BeanCopier.create(GroupDO.class, GroupModel.class, false);
 
     private static final String emailSymbol = "@";
     private static final String qqEmailDoMain = "qq.com";
@@ -48,7 +46,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
             // 写入session
 
         } else {
-            throw new RedashException("密码错误");
+            throw new RedashBadRequestException("密码错误");
         }
         return true;
     }
@@ -60,40 +58,46 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     }
 
     @Override
-    public UserModel addUser(UserModel user) {
-        String email = user.getEmail();
+    public UserModel addUser(String name, String email) {
+        UserDO user = baseMapper.getByEmail(email);
+        if (null != user) {
+            throw new RedashBadRequestException("email already exists");
+        }
+
+        UserModel userModel = new UserModel();
         if (! email.contains(emailSymbol)) {
-            throw new RedashException("bad email address.");
+            throw new RedashBadRequestException("bad email address.");
         }
 
         String[] address = email.split(emailSymbol, 1);
 
         if (address[0].toLowerCase() == qqEmailDoMain) {
-            throw new RedashException("bad email address.");
+            throw new RedashBadRequestException("bad email address.");
         }
 
-        UserDO userDO = new UserDO();
-        COPIER.copy(user, userDO, null);
-
         // 默认生成密码：yc + 用户名
-        String pass = DigestUtil.md5Hex("yc" + user.getName());
+        String pass = DigestUtil.bcrypt("yc" + name);
+        String apiKey = RandomUtil.randomString(40);
+
+        UserDO userDO = new UserDO();
+        userDO.setName(name);
+        userDO.setEmail(email);
 
         userDO.setPasswordHash(pass);
         userDO.setOrgId(1L);
-        userDO.setGroups(null);
-        userDO.setApiKey("");
-        userDO.setPasswordHash("");
-        userDO.setDetails(null);
+        userDO.setApiKey(apiKey);
+//        userDO.setGroups(2);
 
         baseMapper.insert(userDO);
-        return user;
+        BeanUtil.copyProperties(userDO, userModel);
+        return userModel;
     }
 
     @Override
     public UserModel getUserById(Long id) {
         UserDO userDO = baseMapper.selectById(id);
         UserModel userModel = new UserModel();
-        COPIER2.copy(userDO, userModel, null);
+        BeanUtil.copyProperties(userDO, userModel);
         return userModel;
     }
 
@@ -124,14 +128,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         for (UserDO user : list) {
             UserModel userModel = new UserModel();
 
-            COPIER2.copy(user,userModel,null);
+            BeanUtil.copyProperties(user, userModel);
 
-            Integer[] userGroups = user.getGroups();
+//            Integer[] userGroups = user.getGroups();
             List<GroupModel> groupModels = new ArrayList<>();
-            for (Integer group : userGroups) {
-                groupModels.add(groups.get(group));
-            }
-            userModel.setGroups(groupModels);
+//            for (Integer group : userGroups) {
+//                groupModels.add(groups.get(group));
+//            }
+//            userModel.setGroups(groupModels);
             resultList.add(userModel);
         }
         return resultList;
@@ -141,7 +145,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         Map<Integer,GroupModel> resultMap = new HashMap<>(10);
         for (GroupDO group : groups) {
             GroupModel groupModel = new GroupModel();
-            GROUP_COPIER.copy(group, groupModel, null);
+            BeanUtil.copyProperties(group, groupModel);
             resultMap.put(group.getId().intValue(), groupModel);
         }
         return resultMap;

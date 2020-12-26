@@ -1,4 +1,4 @@
-package com.dancoder.redash.dao.dataobject;
+package com.dancoder.redash.dao.entity;
 
 import lombok.Data;
 

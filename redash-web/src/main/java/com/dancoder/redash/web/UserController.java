@@ -4,6 +4,7 @@ import com.dancoder.redash.api.UserService;
 import com.dancoder.redash.api.model.UserModel;
 import com.dancoder.redash.business.vo.UserConditionVO;
 import com.dancoder.redash.framework.object.PageResult;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +27,7 @@ public class UserController {
     @PostMapping("/users")
     @ResponseBody
     public UserModel addUser(@RequestParam("name") String name, @RequestParam("email") String email) {
-        UserModel user = new UserModel();
-        user.setName(name);
-        user.setEmail(email);
-        return userService.addUser(user);
+        return userService.addUser(name, email);
     }
 
     @GetMapping("/users")

@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * @author dancoder
  */
-public class RedashException extends RuntimeException{
+public class RedashBadRequestException extends RuntimeException{
 
     /**
      * @param message
      */
-    public RedashException(String message) {
+    public RedashBadRequestException(String message) {
         super(message);
     }
 
@@ -19,7 +19,7 @@ public class RedashException extends RuntimeException{
      * @param message
      * @param cause
      */
-    public RedashException(String message, Throwable cause) {
+    public RedashBadRequestException(String message, Throwable cause) {
         super(message, cause);
     }
 }
