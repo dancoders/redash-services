@@ -1,5 +1,7 @@
 package com.dancoder.redash.dao.dataobject;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
@@ -13,10 +15,9 @@ import javax.persistence.Table;
 @Data
 @Table(name = "data_source_groups")
 public class DataSourceGroupDO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private Long id;
     private Long dataSourceId;
     private Long groupId;
-    private boolean viewOnly;
+    private Boolean viewOnly;
 }

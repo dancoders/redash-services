@@ -1,5 +1,9 @@
 package com.dancoder.redash.dao.dataobject;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
@@ -14,8 +18,7 @@ import java.sql.Timestamp;
 @Data
 @Table(name = "queries")
 public class QueryDO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private Long id;
     private Long version;
     private Long orgId;
@@ -35,6 +38,8 @@ public class QueryDO {
     private String options;
     private Object searchVector;
     private String tags;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Timestamp updatedAt;
+    @TableField(fill = FieldFill.INSERT)
     private Timestamp createdAt;
 }

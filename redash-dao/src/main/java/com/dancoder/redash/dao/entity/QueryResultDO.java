@@ -1,5 +1,7 @@
 package com.dancoder.redash.dao.dataobject;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
@@ -14,8 +16,7 @@ import java.sql.Timestamp;
 @Data
 @Table(name = "query_results")
 public class QueryResultDO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private Long id;
     private Long orgId;
     private Long dataSourceId;

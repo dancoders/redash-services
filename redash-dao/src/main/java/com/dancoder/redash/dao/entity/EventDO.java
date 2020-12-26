@@ -1,10 +1,11 @@
 package com.dancoder.redash.dao.dataobject;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 
@@ -14,8 +15,7 @@ import java.sql.Timestamp;
 @Data
 @Table(name = "events")
 public class EventDO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private Long id;
     private Long orgId;
     private Long userId;
@@ -23,5 +23,6 @@ public class EventDO {
     private String ObjectType;
     private String objectId;
     private String additionalProperties;
+    @TableField(fill = FieldFill.INSERT)
     private Timestamp createdAt;
 }

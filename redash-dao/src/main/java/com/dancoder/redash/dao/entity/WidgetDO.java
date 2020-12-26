@@ -1,5 +1,9 @@
 package com.dancoder.redash.dao.dataobject;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
@@ -14,14 +18,16 @@ import java.sql.Timestamp;
 @Data
 @Table(name = "widgets")
 public class WidgetDO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private Long id;
     private Long visualizationId;
     private String text;
     private Long width;
     private String options;
     private Long dashboardsId;
-    private Timestamp updatedAt;
+
+    @TableField(fill = FieldFill.INSERT)
     private Timestamp createdAt;
+
+
 }

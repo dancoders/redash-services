@@ -1,5 +1,9 @@
 package com.dancoder.redash.dao.dataobject;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
@@ -14,8 +18,7 @@ import java.sql.Timestamp;
 @Data
 @Table(name = "api_keys")
 public class ApiKeyDO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private Long id;
     private Long orgId;
     private Long objectId;
@@ -23,6 +26,8 @@ public class ApiKeyDO {
     private String apiKey;
     private boolean active;
     private Long createdById;
+    @TableField(fill = FieldFill.INSERT)
     private Timestamp createdAt;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Timestamp updatedAt;
 }

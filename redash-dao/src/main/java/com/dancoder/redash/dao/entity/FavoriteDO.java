@@ -1,5 +1,9 @@
 package com.dancoder.redash.dao.dataobject;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
@@ -14,13 +18,15 @@ import java.sql.Timestamp;
 @Data
 @Table(name = "favorites")
 public class FavoriteDO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private Long id;
     private Long orgId;
     private Long userId;
     private Long objectId;
     private String ObjectType;
+
+    @TableField(fill = FieldFill.INSERT)
     private Timestamp createdAt;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Timestamp updatedAt;
 }
