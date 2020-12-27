@@ -2,6 +2,7 @@ package com.dancoder.redash.web;
 
 import com.dancoder.redash.api.UserService;
 import com.dancoder.redash.api.model.UserModel;
+import com.dancoder.redash.api.vo.UserVO;
 import com.dancoder.redash.business.vo.UserConditionVO;
 import com.dancoder.redash.framework.object.PageResult;
 import org.apache.catalina.User;
@@ -20,14 +21,20 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/username/{id}")
-    public UserModel getUserName(@PathVariable Long id) {
+    public UserVO getUserName(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @PostMapping("/users")
     @ResponseBody
-    public UserModel addUser(@RequestParam("name") String name, @RequestParam("email") String email) {
+    public UserVO addUser(@RequestParam("name") String name, @RequestParam("email") String email) {
         return userService.addUser(name, email);
+    }
+
+    @PostMapping("/users/{id}/regenerate_api_key")
+    @ResponseBody
+    public UserVO regenerateApiKey(@PathVariable Long id) {
+        return userService.regenerateApiKey(id);
     }
 
     @GetMapping("/users")

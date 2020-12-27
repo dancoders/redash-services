@@ -20,7 +20,7 @@ public class GroupDO {
     private Long orgId;
     private String type;
     private String name;
-    private String permissions;
+    private String[] permissions;
     @TableField(fill = FieldFill.INSERT)
     private Timestamp createdAt;
 }

@@ -2,6 +2,8 @@ package com.dancoder.redash.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import org.apache.ibatis.type.JdbcType;
+import tk.mybatis.mapper.annotation.ColumnType;
 
 import java.util.Date;
 

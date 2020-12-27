@@ -5,10 +5,12 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.dynamic.datasource.annotation.Master;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dancoder.redash.api.UserService;
 import com.dancoder.redash.api.model.GroupModel;
 import com.dancoder.redash.api.model.UserModel;
+import com.dancoder.redash.api.vo.UserVO;
 import com.dancoder.redash.business.vo.UserConditionVO;
 import com.dancoder.redash.dao.entity.GroupDO;
 import com.dancoder.redash.dao.entity.UserDO;
@@ -58,13 +60,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     }
 
     @Override
-    public UserModel addUser(String name, String email) {
+    public UserVO addUser(String name, String email) {
         UserDO user = baseMapper.getByEmail(email);
         if (null != user) {
             throw new RedashBadRequestException("email already exists");
         }
 
-        UserModel userModel = new UserModel();
+        UserVO userVO = new UserVO();
         if (! email.contains(emailSymbol)) {
             throw new RedashBadRequestException("bad email address.");
         }
@@ -82,6 +84,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         UserDO userDO = new UserDO();
         userDO.setName(name);
         userDO.setEmail(email);
+        userDO.setProfileImageUrl(
+                String.format("https://www.gravatar.com/avatar/%s?s=40&d=identicon", DigestUtil.md5Hex(email.toLowerCase())));
 
         userDO.setPasswordHash(pass);
         userDO.setOrgId(1L);
@@ -90,16 +94,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         userDO.setGroups(new Integer[]{2});
 
         baseMapper.insert(userDO);
-        BeanUtil.copyProperties(userDO, userModel);
-        return userModel;
+        BeanUtil.copyProperties(userDO, userVO);
+        buildUserVO(userVO);
+        return userVO;
+    }
+
+    private void buildUserVO(UserVO userVO) {
+        if (StringUtils.isNotBlank(userVO.getPasswordHash())) {
+            userVO.setAuthType("password");
+            userVO.setPasswordHash("---");
+        }
+        if (StringUtils.checkValNull(userVO.getDisabledAt())) {
+            userVO.setIsDisabled(false);
+        }
     }
 
     @Override
-    public UserModel getUserById(Long id) {
-        UserDO userDO = baseMapper.selectById(id);
-        UserModel userModel = new UserModel();
-        BeanUtil.copyProperties(userDO, userModel);
-        return userModel;
+    public UserVO getUserById(Long id) {
+        UserDO userDO = getById(id);
+        UserVO userVO = new UserVO();
+        BeanUtil.copyProperties(userDO, userVO);
+        buildUserVO(userVO);
+        return userVO;
     }
 
     @Override
@@ -117,6 +133,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
                 userList
         );
         return pageResult;
+    }
+
+    private UserDO getById(Long id) {
+        return baseMapper.getById(id);
+    }
+
+    @Override
+    public UserVO regenerateApiKey(Long id) {
+        UserVO userVO = new UserVO();
+        String apiKey = RandomUtil.randomString(40);
+        UserDO userDO = new UserDO();
+        userDO.setId(id);
+        userDO.setApiKey(apiKey);
+        baseMapper.updateById(userDO);
+
+        userDO = getById(id);
+        BeanUtil.copyProperties(userDO, userVO);
+        return userVO;
     }
 
     private List<UserModel> geProperties(List<UserDO> list) {
