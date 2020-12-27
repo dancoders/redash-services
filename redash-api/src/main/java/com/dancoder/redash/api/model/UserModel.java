@@ -17,7 +17,7 @@ public class UserModel {
     private String email;
     private String profileImageUrl;
     private String passwordHash;
-    private Integer groups;
+    private List<GroupModel> groups;
     private String apiKey;
     private Date disabledAt;
     private JSONObject details;

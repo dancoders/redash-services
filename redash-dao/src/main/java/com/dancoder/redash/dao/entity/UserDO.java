@@ -3,7 +3,6 @@ package com.dancoder.redash.dao.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -19,9 +18,13 @@ public class UserDO {
     private String email;
     private String profileImageUrl;
     private String passwordHash;
-    private Integer groups;
+
+//    @ColumnType(typeHandler = com.dancoder.redash.framework.handle.mybatis.ArrayTypeHandler.class, jdbcType = JdbcType.ARRAY)
+    private Integer[] groups;
     private String apiKey;
     private Date disabledAt;
+
+//    @ColumnType(typeHandler = com.dancoder.redash.framework.handle.mybatis.JSONTypeHandler.class, jdbcType = JdbcType.JAVA_OBJECT)
     private Object details;
 
     @TableField(value = "created_at", fill = FieldFill.INSERT)

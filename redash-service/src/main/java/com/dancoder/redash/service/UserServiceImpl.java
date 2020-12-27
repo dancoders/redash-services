@@ -86,7 +86,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         userDO.setPasswordHash(pass);
         userDO.setOrgId(1L);
         userDO.setApiKey(apiKey);
-//        userDO.setGroups(2);
+        // TODO 新增用户加入默认group，后期是否需要动态加载
+        userDO.setGroups(new Integer[]{2});
 
         baseMapper.insert(userDO);
         BeanUtil.copyProperties(userDO, userModel);
@@ -130,12 +131,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 
             BeanUtil.copyProperties(user, userModel);
 
-//            Integer[] userGroups = user.getGroups();
+            Integer[] userGroups = user.getGroups();
             List<GroupModel> groupModels = new ArrayList<>();
-//            for (Integer group : userGroups) {
-//                groupModels.add(groups.get(group));
-//            }
-//            userModel.setGroups(groupModels);
+            for (Integer group : userGroups) {
+                groupModels.add(groups.get(group));
+            }
+            userModel.setGroups(groupModels);
             resultList.add(userModel);
         }
         return resultList;

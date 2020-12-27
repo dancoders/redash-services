@@ -7,8 +7,7 @@
     <resultMap id="baseResultMap" type="com.dancoder.redash.dao.entity.UserDO">
         <result column="id" property="id" jdbcType="INTEGER"></result>
         <result column="org_id" property="orgId" jdbcType="INTEGER"></result>
-        <result column="groups" property="groups"></result>
-<!--        typeHandler="com.dancoder.redash.framework.handle.mybatis.ArrayTypeHandler"-->
+        <result column="groups" property="groups" typeHandler="com.dancoder.redash.framework.handle.mybatis.ArrayTypeHandler"></result>
         <result column="name" property="name" jdbcType="VARCHAR"></result>
         <result column="email" property="email" jdbcType="VARCHAR"></result>
         <result column="profile_image_url" property="profileImageUrl" jdbcType="VARCHAR"></result>
@@ -30,13 +29,10 @@
         select * from users
     </select>
 
-<!--    <insert id="insert" parameterType="com.dancoder.redash.dao.entity.UserDO">-->
-<!--        INSERT INTO users(name, email, org_id, password_hash, groups, api_key, details)-->
-<!--        VALUES (#{name}, #{email}, #{orgId}, #{passwordHash},-->
-<!--        #{groups,jdbcType=ARRAY, typeHandler=com.dancoder.redash.framework.handle.mybatis.ArrayTypeHandler},-->
-<!--        #{apiKey}, #{details})-->
-<!--        <selectKey resultType="java.lang.Long" keyProperty="id">-->
-<!--            SELECT LAST_INSERT_ID() AS ID-->
-<!--        </selectKey>-->
-<!--    </insert>-->
+    <insert id="insert" parameterType="com.dancoder.redash.dao.entity.UserDO">
+        INSERT INTO users(name, email, org_id, password_hash, groups, api_key, details, created_at, updated_at)
+        VALUES (#{name}, #{email}, #{orgId}, #{passwordHash},
+        #{groups,jdbcType=ARRAY, typeHandler=com.dancoder.redash.framework.handle.mybatis.ArrayTypeHandler},
+        #{apiKey}, #{details}, now(), now())
+    </insert>
 </mapper>
