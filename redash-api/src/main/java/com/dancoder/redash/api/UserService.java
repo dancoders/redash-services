@@ -66,4 +66,11 @@ public interface UserService extends IService<UserDO> {
      * @return
      */
     UserVO update(Long id, String name, String email, Integer[] group_ids);
+
+    /**
+     * 禁用用户
+     * @param id
+     * @return
+     */
+    UserVO disabled(Long id);
 }

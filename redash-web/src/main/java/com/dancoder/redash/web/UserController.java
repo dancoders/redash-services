@@ -38,6 +38,12 @@ public class UserController {
         return userService.update(id, name, email, group_ids);
     }
 
+    @PostMapping("/users/{id}/disable")
+    @ResponseBody
+    public UserVO disabled(@PathVariable Long id) {
+        return userService.disabled(id);
+    }
+
     @PostMapping("/users/{id}/regenerate_api_key")
     @ResponseBody
     public UserVO regenerateApiKey(@PathVariable Long id) {

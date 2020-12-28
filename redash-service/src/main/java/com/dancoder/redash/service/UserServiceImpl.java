@@ -110,6 +110,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         }
         if (StringUtils.checkValNull(userVO.getDisabledAt())) {
             userVO.setIsDisabled(false);
+        } else {
+            userVO.setIsDisabled(true);
         }
     }
 
@@ -174,6 +176,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         baseMapper.updateById(user);
         UserVO userVO = new UserVO();
         BeanUtil.copyProperties(getById(id), userVO);
+        return userVO;
+    }
+
+    @Override
+    public UserVO disabled(Long id) {
+        UserDO user = getById(id);
+        if (null == user) {
+            throw new RedashBadRequestException(404, "账号不存在");
+        }
+
+        user.setId(id);
+
+        if (StringUtils.checkValNull(user.getDisabledAt())) {
+            // 禁用
+            user.setDisabledAt(new Date());
+        } else {
+            // 启用
+            user.setDisabledAt(null);
+        }
+
+        baseMapper.updateById(user);
+        UserVO userVO = new UserVO();
+        BeanUtil.copyProperties(getById(id), userVO);
+
+        buildUserVO(userVO);
         return userVO;
     }
 
