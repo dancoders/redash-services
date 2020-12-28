@@ -27,8 +27,15 @@ public class UserController {
 
     @PostMapping("/users")
     @ResponseBody
-    public UserVO addUser(@RequestParam("name") String name, @RequestParam("email") String email) {
+    public UserVO add(@RequestParam("name") String name, @RequestParam("email") String email) {
         return userService.addUser(name, email);
+    }
+
+    @PostMapping("/users/{id}")
+    @ResponseBody
+    public UserVO update(@PathVariable Long id, @RequestParam("name") String name,
+                         @RequestParam("email") String email, @RequestParam("group_ids") Integer[] group_ids) {
+        return userService.update(id, name, email, group_ids);
     }
 
     @PostMapping("/users/{id}/regenerate_api_key")

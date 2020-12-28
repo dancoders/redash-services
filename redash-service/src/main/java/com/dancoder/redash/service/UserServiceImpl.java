@@ -19,7 +19,9 @@ import com.dancoder.redash.dao.mapper.UserMapper;
 import com.dancoder.redash.framework.exception.RedashBadRequestException;
 import com.dancoder.redash.framework.object.PageResult;
 import com.github.pagehelper.PageHelper;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -41,14 +43,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     @Override
     public boolean login(String email, String password) {
         UserDO user = baseMapper.getByEmail(email);
-        Assert.isNull(user, "用户不存在");
+        if (null == user) {
+            throw new RedashBadRequestException(404, "账号不存在");
+        }
 
         String pass = DigestUtil.md5Hex("yc" + user.getName());
         if (pass.equals(user.getPasswordHash())) {
             // 写入session
 
         } else {
-            throw new RedashBadRequestException("密码错误");
+            throw new RedashBadRequestException(400, "密码错误");
         }
         return true;
     }
@@ -63,18 +67,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     public UserVO addUser(String name, String email) {
         UserDO user = baseMapper.getByEmail(email);
         if (null != user) {
-            throw new RedashBadRequestException("email already exists");
+            throw new RedashBadRequestException(400, "email already exists");
         }
 
         UserVO userVO = new UserVO();
         if (! email.contains(emailSymbol)) {
-            throw new RedashBadRequestException("bad email address.");
+            throw new RedashBadRequestException(400, "bad email address.");
         }
 
         String[] address = email.split(emailSymbol, 1);
 
         if (address[0].toLowerCase() == qqEmailDoMain) {
-            throw new RedashBadRequestException("bad email address.");
+            throw new RedashBadRequestException(400, "bad email address.");
         }
 
         // 默认生成密码：yc + 用户名
@@ -111,9 +115,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 
     @Override
     public UserVO getUserById(Long id) {
-        UserDO userDO = getById(id);
+        UserDO user = getById(id);
+        if (null == user) {
+            throw new RedashBadRequestException(404, "账号不存在");
+        }
         UserVO userVO = new UserVO();
-        BeanUtil.copyProperties(userDO, userVO);
+        BeanUtil.copyProperties(user, userVO);
         buildUserVO(userVO);
         return userVO;
     }
@@ -150,6 +157,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 
         userDO = getById(id);
         BeanUtil.copyProperties(userDO, userVO);
+        return userVO;
+    }
+
+    @Override
+    public UserVO update(Long id, String name, String email, Integer[] group_ids) {
+        UserDO user = getById(id);
+        if (null == user) {
+            throw new RedashBadRequestException(404, "账号不存在");
+        }
+        user.setId(id);
+        user.setName(name);
+        user.setEmail(email);
+        user.setGroups(group_ids);
+
+        baseMapper.updateById(user);
+        UserVO userVO = new UserVO();
+        BeanUtil.copyProperties(getById(id), userVO);
         return userVO;
     }
 

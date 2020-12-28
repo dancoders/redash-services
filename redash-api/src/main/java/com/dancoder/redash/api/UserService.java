@@ -56,4 +56,14 @@ public interface UserService extends IService<UserDO> {
      * @return
      */
     UserVO regenerateApiKey(Long id);
+
+    /**
+     * 更新user
+     * @param id
+     * @param name
+     * @param email
+     * @param group_ids
+     * @return
+     */
+    UserVO update(Long id, String name, String email, Integer[] group_ids);
 }
