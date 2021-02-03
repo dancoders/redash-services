@@ -4,19 +4,23 @@
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/maven-plugin/)
+* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.3.7.RELEASE/maven-plugin/)
+* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.3.7.RELEASE/reference/htmlsingle/#using-boot-devtools)
+* [Spring Configuration Processor](https://docs.spring.io/spring-boot/docs/2.3.7.RELEASE/reference/htmlsingle/#configuration-metadata-annotation-processor)
+* [Spring Web](https://docs.spring.io/spring-boot/docs/2.3.7.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications)
+* [OAuth2 Client](https://docs.spring.io/spring-boot/docs/2.3.7.RELEASE/reference/htmlsingle/#boot-features-security-oauth2-client)
 * [MyBatis Framework](https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications)
-* [Arthas](https://arthas.gitee.io/index.html)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/reference/htmlsingle/#using-boot-devtools)
+* [JDBC API](https://docs.spring.io/spring-boot/docs/2.3.7.RELEASE/reference/htmlsingle/#boot-features-sql)
+* [Spring for Apache Kafka](https://docs.spring.io/spring-boot/docs/2.3.7.RELEASE/reference/htmlsingle/#boot-features-kafka)
+* [Java Mail Sender](https://docs.spring.io/spring-boot/docs/2.3.7.RELEASE/reference/htmlsingle/#boot-features-email)
 
 ### Guides
 The following guides illustrate how to use some features concretely:
 
-* [《阿里巴巴Java开发手册》](https://github.com/alibaba/p3c)
-* [MyBatis Quick Start](https://github.com/mybatis/spring-boot-starter/wiki/Quick-Start)
-* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
 * [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
+* [MyBatis Quick Start](https://github.com/mybatis/spring-boot-starter/wiki/Quick-Start)
+* [Accessing Relational Data using JDBC with Spring](https://spring.io/guides/gs/relational-data-access/)
+* [Managing Transactions](https://spring.io/guides/gs/managing-transactions/)
 
