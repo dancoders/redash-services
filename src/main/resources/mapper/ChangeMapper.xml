@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.redash.mapper.ChangeMapper">
+    <resultMap id="baseResultMap" type="com.redash.entity.ChangeDO">
+        <result column="id" property="id" jdbcType="INTEGER"></result>
+        <result column="object_version" property="objectVersion" jdbcType="INTEGER"></result>
+        <result column="user_id" property="userId" jdbcType="INTEGER"></result>
+        <result column="change" property="change" jdbcType="VARCHAR"></result>
+        <result column="object_id" property="objectId" jdbcType="INTEGER"></result>
+        <result column="object_type" property="objectType" jdbcType="VARCHAR"></result>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+</mapper>

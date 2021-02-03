@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候会抛出异常,不启动则使用默认数据源.
+      datasource:
+        master:
+          url: jdbc:postgresql://localhost:5432/redash?useUnicode=true&characterEncoding=gbk&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+          username: root
+          password: 123456
+          driver-class-name: org.postgresql.Driver
+  application:
+    name: redash
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.dancoder.redash.dao.entity.**
+  configuration:
+    auto-mapping-behavior: full
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    com.baomidou.mybatisplus.samples.quickstart: debug
+server:
+  port: 8082
+  servlet:
+    context-path: /redash
