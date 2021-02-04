@@ -57,10 +57,4 @@ public class UserController {
         PageResult result = userService.listUser(vo);
         return result;
     }
-
-    @PostMapping("/users/{id}/disable")
-    @ResponseBody
-    public void disabled(@PathVariable String id){
-
-    }
 }

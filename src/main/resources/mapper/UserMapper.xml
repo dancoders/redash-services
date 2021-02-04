@@ -31,14 +31,14 @@
         WHERE email = #{email}
     </select>
     
-    <select id="findUsersByCondition" parameterType="com.dancoder.redash.business.vo.UserConditionVO" resultMap="baseResultMap">
+    <select id="findUsersByCondition" parameterType="com.redash.queryvo.UserConditionVO" resultMap="baseResultMap">
         select * from users
     </select>
 
     <insert id="insert" parameterType="com.redash.entity.UserDO">
         INSERT INTO users(name, email, org_id, password_hash, groups, api_key, details, created_at, updated_at)
         VALUES (#{name}, #{email}, #{orgId}, #{passwordHash},
-        #{groups,jdbcType=ARRAY, typeHandler=com.dancoder.redash.framework.handle.mybatis.ArrayTypeHandler},
+        #{groups,jdbcType=ARRAY, typeHandler=com.redash.framework.handle.mybatis.ArrayTypeHandler},
         #{apiKey}, #{details}, now(), now())
     </insert>
 </mapper>
